@@ -64,6 +64,8 @@ trait Filterable
         // Apply each filter to the query builder instance
 
         foreach ($params as $field => $value) {
+            $value = Arr::convertIfNumeric($value);
+            $value = Arr::convertIfBoolean($value);
             app($this->getFilterResolver())->apply($query, $field, $value);
         }
 
